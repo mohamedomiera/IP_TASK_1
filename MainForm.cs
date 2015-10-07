@@ -46,18 +46,7 @@ namespace IP_TASK_1
                             int height = Convert.ToInt32(line[0]);
                             int width = Convert.ToInt32(line[1]);
                             string AllFile = sr.ReadToEnd();
-                            //buff[,] buffer = new buff[height, width];
-                            //Bitmap bm = new Bitmap(ofd.FileName);
-                            //for (int i = 0; i < width; i++)
-                            //{
-                            //    for (int j = 0; j < height; j++)
-                            //    {
-                            //        Color clr = bm.GetPixel(i,j);                           
-                            //        buffer[i,j].b = clr.B;
-                            //        buffer[i,j].g = clr.G;
-                            //        buffer[i,j].r = clr.R;
-                            //    }
-                            //}
+                           string[] FileRows = AllFile.Split('\n');
                         }
                     }
                     catch (Exception ex)
