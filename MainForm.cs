@@ -12,18 +12,12 @@ using System.Windows.Forms;
 
 namespace IP_TASK_1
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
-        public struct buff
-        {
-            public int r;
-            public int g;
-            public int b;
-        };
         OpenFileDialog ofd = new OpenFileDialog();
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
@@ -36,6 +30,9 @@ namespace IP_TASK_1
                 {
                     try
                     {
+
+                        int height,width;
+                        string AllFile;
                         using (StreamReader sr = new StreamReader(ofd.FileName))
                         {
                             for (int i = 0; i < 2; i++)
@@ -43,11 +40,29 @@ namespace IP_TASK_1
                                 sr.ReadLine();
                             }
                             string[] line = sr.ReadLine().Split();
-                            int height = Convert.ToInt32(line[0]);
-                            int width = Convert.ToInt32(line[1]);
-                            string AllFile = sr.ReadToEnd();
-                           string[] FileRows = AllFile.Split('\n');
+                            width = Convert.ToInt32(line[0]);
+                            height = Convert.ToInt32(line[1]);
+                            sr.ReadLine();
+                            AllFile = sr.ReadToEnd();
+                            richTextBox1.Text = AllFile;
                         }
+                        Bitmap bm = new Bitmap(width, height);
+                        int index = 0;
+                        for (int i = 0; i < width; i++)
+                            {
+                                for (int j = 0; j < height; j++)
+                                {
+                                    int Red = Convert.ToInt32(AllFile[index]);
+                                    index++;
+                                    int Green = Convert.ToInt32(AllFile[index]);
+                                    index++;
+                                    int Blue = Convert.ToInt32(AllFile[index]);
+                                    index++;
+                                    Color Color = Color.FromArgb(Red, Green, Blue);
+                                    bm.SetPixel(i,j,Color);
+                                }
+                            }
+                            pictureBox1.Image = bm;
                     }
                     catch (Exception ex)
                     {
