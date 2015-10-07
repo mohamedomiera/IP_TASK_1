@@ -33,6 +33,9 @@ namespace IP_TASK_1
 
                         int height,width;
                         string AllFile;
+                        string []Rows;
+                        string[] Cols={};
+                        string[] pixelsVal={};
                         using (StreamReader sr = new StreamReader(ofd.FileName))
                         {
                             for (int i = 0; i < 2; i++)
@@ -44,22 +47,26 @@ namespace IP_TASK_1
                             height = Convert.ToInt32(line[1]);
                             sr.ReadLine();
                             AllFile = sr.ReadToEnd();
-                            richTextBox1.Text = AllFile;
                         }
+                        Rows = AllFile.Split('\n');
+                        for (int i = 0; i < Rows.Length - 1; i++)
+                        {
+                            Cols= Rows[i].Split();
+                        }
+                        richTextBox1.Text = pixelsVal[1] + "\n";
                         Bitmap bm = new Bitmap(width, height);
-                        int index = 0;
                         for (int i = 0; i < width; i++)
                             {
                                 for (int j = 0; j < height; j++)
                                 {
-                                    int Red = Convert.ToInt32(AllFile[index]);
-                                    index++;
-                                    int Green = Convert.ToInt32(AllFile[index]);
-                                    index++;
-                                    int Blue = Convert.ToInt32(AllFile[index]);
-                                    index++;
-                                    Color Color = Color.FromArgb(Red, Green, Blue);
-                                    bm.SetPixel(i,j,Color);
+                                    // Red = Convert.ToInt32(AllFile[index]);
+                                    //index++;
+                                    // Green = Convert.ToInt32(AllFile[index]);
+                                    //index++;
+                                    // Blue = Convert.ToInt32(AllFile[index]);
+                                    //index++;
+                                    Color color = Color.FromArgb(i,j,j);
+                                    bm.SetPixel(i, j, color);
                                 }
                             }
                             pictureBox1.Image = bm;
@@ -69,7 +76,6 @@ namespace IP_TASK_1
                         Console.WriteLine("The file could not be read:");
                         Console.WriteLine(ex.Message);
                     }
-
                 }
                 else
                 {
